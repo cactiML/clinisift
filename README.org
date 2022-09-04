@@ -1,0 +1,70 @@
+[[./assets/clinisift.png]]
+
+clinisift is a multitool for quickly parsing, analyzing, and visualizing medical records.
+
+The goal is to provide out-of-the-box functionality for common NLP objectives when interacting with electronic medical records, with as little boilerplate code as possible.
+
+Some motivating examples that can be accomplished in only a few lines of code to illustrate possible use-cases:
+- Extract clinical problems and procedures mentioned in a record's CLINICAL HISTORY section.
+- When exploring a new dataset, visualize records with clinical and medication entities parsed and highlighted on-the-fly.
+- Check if both a particular medication and particular surgical procedure are mentioned in a patient's PAST MEDICAL HISTORY.
+
+
+** Quick Features
+- *Parse* - Extract clinical and medical entities through Transformers-based Named Entity Recognition, as well as other components like medical record section identification. Also supports any NER model that can be loaded as a HuggingFace pipeline
+- *Analyze* - Built-in methods to quickly filter through parsed data with as little code overhead as possible.
+- *Visualize* - spaCy-based visualizer that integrates with Transformers NER to visualize medical record parses on-the-fly, programmatically or via command line.
+
+* Get Started
+** Installation
+Install via =pip=:
+#+BEGIN_SRC bash
+pip install clinisift
+#+END_SRC
+
+Or, from source:
+#+BEGIN_SRC bash
+git clone git@github.com:clinisift/clinisift.git
+cd clinisift && pip install -e .
+#+END_SRC
+
+* Quickstart
+Below are some examples for common use-cases. A slightly longer overview of everything offered in =clinisift= is available in the Wiki.
+
+** Extract all clinical entities and medications from a *.txt file
+#+BEGIN_SRC python
+from clinisift.cliniparse import Parser
+from clinisift.doc import Doc
+
+parser = Parser(sent_per_line=True) # default models: "clinical_ner", "medication_ner"
+
+text_file_path = "~/my/file/path.txt"
+doc = Doc(text_file_path, parser, is_file=True) # You can also pass in a string or list of strings, and set `is_file` to False
+
+res = doc.parse()
+# = {
+#	"sentences": [...],
+#	"entities": [...],
+# }
+
+
+doc.visualize() # Visualize using spaCy NER visualizer
+#+END_SRC
+
+More features, such as extracting section headers and using custom sentence tokenizers, is available in the wiki.
+
+** Visualize entities extracted on-the-fly from a directory of .txt files
+To launch a visualizer using the default Parser() config:
+
+From the command line:
+#+BEGIN_SRC bash
+python -m clinisift.visualizer /my/data/dir
+#+END_SRC
+
+A Flask server will be launched:
+
+[[./assets/visualizer_1.png]]
+
+[[./assets/visualizer_2.png]]
+
+The visualizer module can be integrated with any `Parser` for more customizability about the NER pipelines used, entities visualized, and so forth. More information is available in the wiki.
