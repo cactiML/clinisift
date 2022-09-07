@@ -1,5 +1,4 @@
 * Overview
-=clinisift= is a 
 * Components
 ** Parser
 A =Parser= object serves as the main configuration for how =clinisift= will be applied to each document. When individual documents are being parsed, a =Parser= object will be passed through that configures which models/pipelines, sentence tokenizer, GPU device, and other options will be used.
