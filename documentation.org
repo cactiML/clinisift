@@ -19,15 +19,15 @@ class Parser(
 #+END_SRC
 
 *** Parameters
-- *models: =list or dict= -* HuggingFace Transformers models to be used for Named Entity Recognition (NER). If /None/ (default), the default =clinical= and =medication= models will be used. More information about the models _here_. Any [[https://huggingface.co/models?pipeline_tag=token-classification][HuggingFace token classification]] model should work.
-- *include_ents: =list= -* Extracted clinical entities to keep; any entities not in the list will be dropped from the parse results. If /None/ (default), all entities will be kept.
-- *exclude_ents: =list= -** Extracted clinical entities to drop; any entities in the list will be dropped from the parse results. If /None/ (default), all entities will be kept. If both =include_ents= and =exclude_ents= are passed, the system will only see the =include_ents= parameter.
-- *iob_resolve: =bool= -* Named Entity Recognition models are trained with data in the [[https://en.wikipedia.org/wiki/Inside–outside–beginning_(tagging)][Inside–outside–beginning format]]. If /True/ (default), multi-token entities will be grouped together rather than kept as separate entities with /B-/ and /I-/ tags.
-- *sent_tokenizer: =str= -* Which tokenizer to use to split documents into sentences (if =sent_per_line=False=). Currently only "clinitokenizer" (default) or "nltk" for [[https://github.com/clinisift/clinitokenizer][clinitokenizer]] or [[https://www.nltk.org/api/nltk.tokenize.html][nltk.tokenize]], respectively.
-- *sent_per_line: =bool= -* If input is already sentence-tokenized with 1 sentence per line, set as =True= to disable sentence tokenizer for being run. Default =False=.
-- *extract_section_headers: =bool= --* Extract section headers and associate sentences with corresponding section headers. Default =False=. Uses regular expression-based matching for identifying section headers, configured in =section_header_expr= parameter.
-- *section_header_expr: =str= -* Regular expression string to capture section headers. Only used if =extract_section_headers=True=. Default regex is =r"^[A-Za-z /]*:"=.
-- *device: =int= -* CUDA device to use, if multiple GPUs on system.
+- *models*: =list or dict= -- HuggingFace Transformers models to be used for Named Entity Recognition (NER). If /None/ (default), the default =clinical= and =medication= models will be used. More information about the models _here_. Any [[https://huggingface.co/models?pipeline_tag=token-classification][HuggingFace token classification]] model should work.
+- *include_ents*: =list= -- Extracted clinical entities to keep; any entities not in the list will be dropped from the parse results. If /None/ (default), all entities will be kept.
+- *exclude_ents*: =list= -- Extracted clinical entities to drop; any entities in the list will be dropped from the parse results. If /None/ (default), all entities will be kept. If both =include_ents= and =exclude_ents= are passed, the system will only see the =include_ents= parameter.
+- *iob_resolve*: =bool= -- Named Entity Recognition models are trained with data in the [[https://en.wikipedia.org/wiki/Inside–outside–beginning_(tagging)][Inside–outside–beginning format]]. If /True/ (default), multi-token entities will be grouped together rather than kept as separate entities with /B-/ and /I-/ tags.
+- *sent_tokenizer*: =str= -- Which tokenizer to use to split documents into sentences (if =sent_per_line=False=). Currently only "clinitokenizer" (default) or "nltk" for [[https://github.com/clinisift/clinitokenizer][clinitokenizer]] or [[https://www.nltk.org/api/nltk.tokenize.html][nltk.tokenize]], respectively.
+- *sent_per_line*: =bool= -- If input is already sentence-tokenized with 1 sentence per line, set as =True= to disable sentence tokenizer for being run. Default =False=.
+- *extract_section_headers*: =bool= -- Extract section headers and associate sentences with corresponding section headers. Default =False=. Uses regular expression-based matching for identifying section headers, configured in =section_header_expr= parameter.
+- *section_header_expr*: =str= -- Regular expression string to capture section headers. Only used if =extract_section_headers=True=. Default regex is =r"^[A-Za-z /]*:"=.
+- *device*: =int= -- CUDA device to use, if multiple GPUs on system.
   
   
 ** Doc
@@ -42,6 +42,6 @@ class Doc(
 #+END_SRC
 
 *** Parameters
-- *filepath_or_string: =str= -* Path to *.txt file, string of text, or list<str>. If input is a list, will assume 1 element = 1 sentence and sentence tokenizing will not be performed. Set =is_file=False= if input is not filepath.
-- *parser: =Parser= -* =Parser= object.
-- *is_file: =bool=-* Default =True=.
+- *filepath_or_string*: =str= -- Path to *.txt file, string of text, or list<str>. If input is a list, will assume 1 element = 1 sentence and sentence tokenizing will not be performed. Set =is_file=False= if input is not filepath.
+- *parser*: =Parser= -- =Parser= object.
+- *is_file*: =bool= -- Default =True=.
