@@ -1,8 +1,11 @@
 [[./assets/clinisift.png]]
 
-clinisift is a multitool for quickly parsing, analyzing, and visualizing medical records.
+=clinisift= is a multitool for processing clinical medical records.
 
-The goal is to provide out-of-the-box functionality for common NLP objectives when interacting with electronic medical records, with as little boilerplate code as possible.
+The main goal is to provide easy, off-the-shelf access to *common NLP processes* when working with medical records:
+- *Sentence Tokenization* and *Section Identification* from unstructured clinical textual data
+- *Named Entity Recognition* of medication-related data and clinical entities from records
+- *Intuitive visualization* of extracted information
 
 Some motivating examples that can be accomplished in only a few lines of code to illustrate possible use-cases:
 - Extract clinical problems and procedures mentioned in a record's CLINICAL HISTORY section.
@@ -36,22 +39,14 @@ Below are some examples for common use-cases. A slightly longer overview of ever
 from clinisift.cliniparse import Parser
 from clinisift.doc import Doc
 
-parser = Parser(sent_per_line=True) # default models: "clinical_ner", "medication_ner"
-
-text_file_path = "~/my/file/path.txt"
-doc = Doc(text_file_path, parser, is_file=True) # You can also pass in a string or list of strings, and set `is_file` to False
+parser = Parser() # med ner and clinical ner
+doc = Doc(text_file_path, parser)
 
 res = doc.parse()
-# = {
-#	"sentences": [...],
-#	"entities": [...],
-# }
-
-
-doc.visualize() # Visualize using spaCy NER visualizer
+# { "sentences": [...],
+# "entities": [...l, }
 #+END_SRC
 
-More features, such as extracting section headers and using custom sentence tokenizers, is available in the wiki.
 
 ** Visualize entities extracted on-the-fly from a directory of .txt files
 To launch a visualizer using the default Parser() config:

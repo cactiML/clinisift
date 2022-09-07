@@ -1,4 +1,21 @@
 * Overview
+=clinisift= is a multitool for processing clinical medical records.
+
+The main goal is to provide easy, off-the-shelf access to *common NLP processes* when working with medical records:
+- *Sentence Tokenization* and *Section Identification* from unstructured clinical textual data
+- *Named Entity Recognition* of medication-related data and clinical entities from records
+- *Intuitive visualization* of extracted information
+
+=clinisift= leverages custom domain-specific fine-tuned Transformers models for NER and tokenization along with sensible defaults to enable researchers and practitioners to *spin up NLP pipelines for working with clinical data* in a few lines of code.
+
+Some motivating examples that can be accomplished in only a few lines of code to illustrate possible use-cases:
+- Extract clinical problems and procedures mentioned in a record's CLINICAL HISTORY section.
+- When exploring a new dataset, visualize records with clinical and medication entities parsed and highlighted on-the-fly.
+- Check if both a particular medication and particular surgical procedure are mentioned in a patient's PAST MEDICAL HISTORY.
+
+Using =clinisift= involves configuring a Parser object, which will be passed through individual Doc objects.
+
+
 * Components
 ** Parser
 A =Parser= object serves as the main configuration for how =clinisift= will be applied to each document. When individual documents are being parsed, a =Parser= object will be passed through that configures which models/pipelines, sentence tokenizer, GPU device, and other options will be used.
