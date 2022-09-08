@@ -32,9 +32,38 @@ cd clinisift && pip install -e .
 #+END_SRC
 
 * Quickstart
-Below are some examples for common use-cases. A slightly longer overview of everything offered in =clinisift= is available in the Wiki.
+For a comprehensive overview of clinisift's capabilities, see the [[https://github.com/clinisift/clinisift/wiki/Components]["Components" page on the wiki]].
 
-** Extract all clinical entities and medications from a *.txt file
+** Components
+clinisift is made up of =Parser= and =Doc= components. See the [[https://github.com/clinisift/clinisift/wiki/Components]["Components" page on the wiki]] for an explanation of all the parameters.
+
+#+BEGIN_SRC python
+class Parser(
+    models=None,
+    include_ents=[],
+    exclude_ents=[],
+    iob_resolve=True,
+    sent_tokenizer="clinitokenizer",
+    sent_per_line=False,
+    extract_section_headers=False,
+    section_header_expr=None,
+    device=None,
+) 
+#+END_SRC
+
+#+BEGIN_SRC python
+class Doc(
+    filepath_or_str,
+    parser,
+    is_file=True
+)
+#+END_SRC
+
+
+** Examples
+Below are some examples for common use-cases. 
+
+*** Extract all clinical entities and medications from a *.txt file
 #+BEGIN_SRC python
 from clinisift.cliniparse import Parser
 from clinisift.doc import Doc
@@ -47,8 +76,7 @@ res = doc.parse()
 # "entities": [...l, }
 #+END_SRC
 
-
-** Visualize entities extracted on-the-fly from a directory of .txt files
+*** Visualize entities extracted on-the-fly from a directory of .txt files
 To launch a visualizer using the default Parser() config:
 
 From the command line:
