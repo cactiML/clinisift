@@ -15,8 +15,8 @@ setuptools.setup(
     name="clinisift-samrawal", # Replace with your own username
     version="0.0.2",
     author="Sam Rawal",
-    author_email="samrawal@gmail.com",
-    description="A  multitool for quickly parsing, analyzing, and visualizing medical records",
+    author_email="scrawal2@illinois.edu",
+    description="An NLP tool for parsing, analyzing, and visualizing medical records",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/clinisift/clinisift",
